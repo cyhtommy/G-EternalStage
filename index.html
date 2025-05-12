@@ -89,6 +89,36 @@
         }
 
 
+        .red-frame {
+            position: relative;
+            display: inline-block;
+            border: 2px solid red; /* 紅色邊框 */
+        }
+
+            .red-frame img {
+                display: block; /* 確保圖片本身是塊級元素，適應父容器 */
+            }
+
+            .red-frame::before {
+                content: '隱藏'; /* 顯示文字 */
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: red; /* 紅色背景 */
+                color: white; /* 白色文字 */
+                font-size: 12px; /* 字體大小 */
+                padding: 2px 5px; /* 內邊距 */
+                z-index: 2; /* 確保文字在最上層 */
+                border-bottom-right-radius: 3px; /* 圓角 */
+            }
+
+        .unit-container {
+            display: flex; /* 使用 Flexbox 進行水平排列 */
+            flex-wrap: wrap; /* 如果空間不足，允許換行 */
+            gap: 5px; /* 圖片之間的間距 */
+        }
+
+
     </style>
 </head>
 <body>
@@ -317,8 +347,8 @@
                     id:entry.ID,
                     name: entry.Title,
                     tag: entry.Scenario,
-                    items: Object.keys(entry.Item),
-                    units: Object.keys(entry.Unit),
+                    items: entry.Item,
+                    units: entry.Unit,
                     techs: entry.Tech,
                     completed: localStorage.getItem(entry.ID) === 'true'
                     
@@ -459,18 +489,36 @@
                 checkboxCell.appendChild(checkbox);
 
                 const tagImage = `<img src="${tagsData[stage.tag].image}" alt="${stage.tag}" title="${tagsData[stage.tag].title}" data-tag="${stage.tag}">`;
-                const itemsImages = stage.items.map(item => `<img src="${itemsData[item].image}" alt="${item}" title="${itemsData[item].title}">`).join(' ');
-                
-                const unitImages = stage.units.map(unit => `<img src="${unitsData[unit].image}" alt="${unit}" title="${unitsData[unit].title}">`).join(' ');
-                
+                const itemsImages = Object.entries(stage.items)
+                    .map(([key, value]) => {
+                        const frameClass = value ? 'red-frame' : ''; 
+                        return `
+                            <div class="${frameClass}">
+                                <img src="${itemsData[key].image}" alt="${key}" title="${itemsData[key].title}">
+                            </div>
+                        `;
+                    })
+                    .join(' ');
+
+                const unitImages = Object.entries(stage.units)
+                    .map(([key, value]) => {
+                        const frameClass = value ? 'red-frame' : '';
+                        return `
+                            <div class="${frameClass}">
+                                <img src="${unitsData[key].image}" alt="${key}" title="${unitsData[key].title}">
+                            </div>
+                        `;
+                    })
+                    .join(' ');
+
                 const techImages = stage.techs.map(tech => `<img src="${techsData[tech].image}" alt="${tech}" title="${techsData[tech].title}">`).join(' ');
                 
                 row.innerHTML = `
                     
                     <td>${tagImage}</td>
                     <td>${stage.name}</td>
-                    <td>${itemsImages}</td>
-                    <td>${unitImages}</td>
+                    <td><div class="unit-container">${itemsImages}</div></td>
+                    <td><div class="unit-container">${unitImages}</div></td>
                     <td>${techImages}</td>
                 `;
                 row.prepend(checkboxCell); // Add the checkbox cell to the beginning of the row
@@ -487,7 +535,7 @@
             const selectedActive = document.getElementById('activeFilter').value;
 
             const filteredStages = stagesData.filter(stage => {
-                const matchesItem = selectedItem ? stage.items.includes(selectedItem) : true;
+                const matchesItem = selectedItem ? Object.keys(stage.items).includes(selectedItem) : true;
                 const matchesTag = selectedTitle ? stage.tag === selectedTitle : true; // Fixed here
                 const matchesComplete = selectedComplete === 'all'
                     ? true
