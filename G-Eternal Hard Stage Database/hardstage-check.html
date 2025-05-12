@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Stages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:gray;
+        }
+
+        .stage {
+            margin: 1px;
+            padding: 1px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 1px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+            th:first-child, td:first-child {
+                width: 40px;
+            }
+            /* Checkbox column */
+            th:nth-child(2), td:nth-child(2) {
+                width: 50px;
+            }
+            /* Stage column */
+            th:nth-child(3), td:nth-child(3) {
+                width: 50px;
+            }
+            /* Tag column */
+            th:nth-child(4), td:nth-child(4) {
+                width: 250px;
+            }
+            /* Items column */
+            th:nth-child(5), td:nth-child(5) {
+                width: 250px;   
+            }
+            /* Units column */
+            
+            th:nth-child(6), td:nth-child(6) {
+                width: 250px;
+            }
+            /* Techs column */
+        .completed {
+            background-color: lightcoral;
+        }
+
+
+        img {
+            height: 75px;
+            width: 75px;
+            max-width: 100%; /* Ensures the image width does not exceed the box width */
+            max-height: 100%; /* Ensures the image height does not exceed the box height */
+            object-fit: contain; /* Maintains the aspect ratio of the image */
+            display: inline-block; /* Ensures the image is treated as a block element */
+            margin: auto; /* Centers the image within the box */
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 2px;
+            background-color: red; /* Default color */
+            cursor: pointer;
+        }
+
+        .circle.completed {
+            background-color: green; /* Completed color */
+        }
+
+        input[type="checkbox"] {
+            width: 20px; /* Set the width of the checkbox */
+            height: 20px; /* Set the height of the checkbox */
+            margin: 2px; /* Optional: Add some spacing around the checkbox */
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Hard關掉落</h1>
+    <div id="filter">
+        <!--<select id="techFilter">
+    <option value="">開發技術書選擇</option>-->
+        <!-- Drop items will be populated here -->
+        <!--</select>-->
+        <select id="itemFilter" onchange="applyFilters()">
+            <option value="">零件選擇</option>
+            <!-- Drop items will be populated here -->
+        </select>
+        <select id="titleFilter" onchange="applyFilters()">
+            <option value="">系列選擇</option>
+            <!-- Tags will be populated here -->
+        </select>
+        <select id="completeFilter" onchange="applyFilters()">
+            <option value="all">全部關卡</option>
+            <option value="imcomplete">僅未完成關卡</option>
+        </select>
+        <select id="activeFilter" onchange="applyFilters()">
+            <option value="all">全部關卡</option>
+            <option value="active">僅當前開放關卡</option>
+            <option value="inactive">過往關卡</option>
+        </select>
+        <button id="resetButton">重置已完成關卡</button>
+    </div>
+
+
+    <div id="stageList">
+        <!-- Stages will be populated here -->
+    </div>
+
+    <table id="stageTable">
+        <thead>
+            <tr>
+                <th>已完成</th>
+                <th>系列</th>
+                <th>關卡</th>
+                <th>零件</th>
+                <th>單位</th>
+                <th>開發書</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Stages will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch data from the database and populate the filters and stage list
+        async function fetchItemsData() {
+            try {
+                const response = await fetch('item_log.csv');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch items data: ${response.statusText}`);
+                }
+
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(','));
+
+                // Assuming the CSV has headers: ID, Title, File Path
+                const headers = rows[0].map(header => header.trim());
+                const dataRows = rows.slice(1);
+
+                itemsData = {};
+                dataRows.forEach(row => {
+                    // Skip empty rows
+                    if (row.every(cell => cell.trim() === "")) {
+                        return;
+                    }
+                    const item = {};
+                    headers.forEach((header, index) => {
+                        item[header] = row[index]?.trim();
+                    });
+                    itemsData[item.ID] = {
+                        image: item['File Path'],
+                        title: item['Title']
+                    };
+                });
+
+                console.log('Items Data:', itemsData);
+            } catch (error) {
+                console.error('Error fetching items data:', error);
+            }
+        }
+
+        async function fetchUnitData() {
+            try {
+                const response = await fetch('unit_log.csv');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch items data: ${response.statusText}`);
+                }
+
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(','));
+
+                // Assuming the CSV has headers: ID, Title, File Path
+                const headers = rows[0].map(header => header.trim());
+                const dataRows = rows.slice(1);
+
+                unitsData = {};
+                dataRows.forEach(row => {
+                    // Skip empty rows
+                    if (row.every(cell => cell.trim() === "")) {
+                        return;
+                    }
+                    const unit = {};
+                    headers.forEach((header, index) => {
+                        unit[header] = row[index]?.trim();
+                    });
+                    unitsData[unit.ID] = {
+                        image: unit['File Path'],
+                        title: unit['Title']
+                    };
+                });
+
+                console.log('Units Data:', unitsData);
+            } catch (error) {
+                console.error('Error fetching units data:', error);
+            }
+        }
+
+        async function fetchTechsData() {
+            try {
+                const response = await fetch('tech_log.csv');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch items data: ${response.statusText}`);
+                }
+
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(','));
+
+                // Assuming the CSV has headers: ID, Title, File Path
+                const headers = rows[0].map(header => header.trim());
+                const dataRows = rows.slice(1);
+
+                techsData = {};
+                dataRows.forEach(row => {
+                    // Skip empty rows
+                    if (row.every(cell => cell.trim() === "")) {
+                        return;
+                    }
+                    const unit = {};
+                    headers.forEach((header, index) => {
+                        unit[header] = row[index]?.trim();
+                    });
+                    techsData[unit.ID] = {
+                        image: unit['File Path'],
+                        title: unit['Title']
+                    };
+                });
+
+                console.log('Techs Data:', techsData);
+            } catch (error) {
+                console.error('Error fetching techs data:', error);
+            }
+        }
+
+
+        async function fetchTagsData() {
+            try {
+                const response = await fetch('scenario_log.csv'); // Replace with the actual file name
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch tags data: ${response.statusText}`);
+                }
+
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(','));
+
+                // Assuming the CSV has headers: ID, Title, File Path, Active
+                const headers = rows[0].map(header => header.trim());
+                const dataRows = rows.slice(1);
+
+                tagsData = {};
+                dataRows.forEach(row => {
+                    // Skip empty rows
+                    if (row.every(cell => cell.trim() === "")) {
+                        return;
+                    }
+
+                    const tag = {};
+                    headers.forEach((header, index) => {
+                        tag[header] = row[index]?.trim();
+                    });
+
+                    // Save the tag data
+                    tagsData[tag.ID] = {
+                        title: tag['Title'],
+                        image: tag['File Path'],
+                        active: tag['Active'] === 'True' // Convert "True"/"False" to boolean
+                    };
+                });
+
+                console.log('Tags Data:', tagsData);
+            } catch (error) {
+                console.error('Error fetching tags data:', error);
+            }
+        }
+
+
+
+        async function fetchData() {
+            try {
+                // Fetch the JSON data
+                const response = await fetch('stage_log.json');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch data: ${response.statusText}`);
+                    
+                }
+
+                // Read the NDJSON file as text
+                const ndjsonText = await response.text();
+
+                // Split the NDJSON into lines and parse each line as JSON
+                const rawData = ndjsonText
+                    .trim()
+                    .split('\n')
+                    .map(line => JSON.parse(line));
+
+                console.log('Raw Data:', rawData);
+
+                // Transform the data into the expected format
+                const stages = rawData.map(entry => ({
+                    name: entry.Title,
+                    tag: entry.Scenario,
+                    items: Object.keys(entry.Item),
+                    units: Object.keys(entry.Unit),
+                    techs: entry.Tech,
+                    completed: false
+                }));
+
+                // Update global variables
+                stagesData = stages;
+                console.log('Stages Data:', stagesData);
+                await fetchItemsData();
+                await fetchTagsData();
+                await fetchUnitData();
+                await fetchTechsData();
+
+                // Populate filters and render stages
+                populateFilters();
+                
+                renderStages(stagesData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+
+        //function renderStages(stages) {
+        //    const stageList = document.getElementById('stageList');
+        //    stageList.innerHTML = '';
+        //    stages.forEach(stage => {
+        //        const div = document.createElement('div');
+        //        div.className = 'stage' + (stage.completed ? ' completed' : '');
+        //        div.innerHTML = `
+        //                    <h3>${stage.name}</h3>
+        //                    <img src="${stage.image_url}" alt="${stage.name}" />
+        //                    <label>
+        //                        <input type="checkbox" ${stage.completed ? 'checked' : ''} onchange="updateProgress(${stage.id}, this.checked)">
+        //                        Completed Today
+        //                    </label>
+        //                `;
+        //        stageList.appendChild(div);
+        //    });
+        //}
+
+
+        document.getElementById('resetButton').onclick = () => {
+            
+            const completebar = document.querySelector('#completeFilter'); // Get the complete filter
+
+            completebar.value = 'all'; // Reset the complete filter to "all"
+
+            for (const stage of stagesData) {
+                stage.completed = false; // Reset all stages to not completed
+                localStorage.setItem(stage.name, false); // Save progress in local storage
+            }
+
+            applyFilters(); // Reapply filters to refresh the displayed stages
+
+
+            //const rows = document.querySelectorAll('#stageTable tbody tr'); // Get all rows in the table
+            //console.log(rows);
+            //rows.forEach((row) => {
+            //    const checkbox = row.querySelector('input[type="checkbox"]'); // Find the checkbox in the row
+
+            //    if (checkbox) {
+            //        checkbox.checked = false; // Uncheck the checkbox
+            //        const stageName = row.querySelector('td:nth-child(3)')?.textContent?.trim(); // Get the stage name from the row
+            //        const stageTag = row.querySelector('td:nth-child(2) img')?.getAttribute('data-tag')?.trim(); // Get the stage tag from the row
+            //        const stage = stagesData.find(stage => ((stage.name === stageName) && (stage.tag === stageTag))); // Find the corresponding stage object
+            //        //console.log('Extracted stageName:', stageName);
+            //        //console.log('Extracted stageTag:', stageTag);
+            //        //console.log('Stages Data:', stage);
+            //        if (stage) {
+            //            updateProgress(stage, row, false); // Update the stage and row
+            //        }
+            //    }
+            //    applyFilters(); // Reapply filters to refresh the displayed stages
+            //});
+        };
+
+
+        fetchData();
+
+
+
+
+        
+
+
+
+        
+
+        function populateFilters() {
+            const itemFilter = document.getElementById('itemFilter');
+            const titleFilter = document.getElementById('titleFilter');
+
+            // Populate item filter
+            Object.keys(itemsData).forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.innerHTML = `<img src="${itemsData[item].image}" alt="${item}" style="width: 20px; height: 20px; vertical-align: middle;">  ${itemsData[item].title}`;
+                itemFilter.appendChild(option);
+            });
+
+            // Populate tag filter
+            Object.keys(tagsData).forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tagsData[tag].title;
+                titleFilter.appendChild(option);
+            });
+
+        }
+
+        // Call this function after your data is loaded
+        // populateFilters();
+
+
+        function updateProgress(stageName, completed) {
+            console.log(`Updated ${stageName} to completed: ${completed}`);
+            // Here you would typically send the update to your backend
+        }
+
+ 
+
+
+
+        function renderStages(stages) {
+            const tbody = document.getElementById('stageTable').querySelector('tbody');
+            tbody.innerHTML = ''; // Clear existing rows
+
+            stages.forEach(stage => {
+                const row = document.createElement('tr');
+                row.className = stage.completed ? 'completed' : '';
+
+                const checkboxCell = document.createElement('td');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = stage.completed;
+                checkbox.onchange = () => updateProgress(stage, row, checkbox.checked);
+                checkboxCell.appendChild(checkbox);
+
+                const tagImage = `<img src="${tagsData[stage.tag].image}" alt="${stage.tag}" title="${tagsData[stage.tag].title}" data-tag="${stage.tag}">`;
+                const itemsImages = stage.items.map(item => `<img src="${itemsData[item].image}" alt="${item}" title="${itemsData[item].title}">`).join(' ');
+                
+                const unitImages = stage.units.map(unit => `<img src="${unitsData[unit].image}" alt="${unit}" title="${unitsData[unit].title}">`).join(' ');
+                
+                const techImages = stage.techs.map(tech => `<img src="${techsData[tech].image}" alt="${tech}" title="${techsData[tech].title}">`).join(' ');
+                
+                row.innerHTML = `
+                    
+                    <td>${tagImage}</td>
+                    <td>${stage.name}</td>
+                    <td>${itemsImages}</td>
+                    <td>${unitImages}</td>
+                    <td>${techImages}</td>
+                `;
+                row.prepend(checkboxCell); // Add the checkbox cell to the beginning of the row
+
+                tbody.appendChild(row);
+            });
+        }
+
+
+        function applyFilters() {
+            const selectedItem = document.getElementById('itemFilter').value;
+            const selectedTitle = document.getElementById('titleFilter').value;
+            const selectedComplete = document.getElementById('completeFilter').value;
+            const selectedActive = document.getElementById('activeFilter').value;
+
+            const filteredStages = stagesData.filter(stage => {
+                const matchesItem = selectedItem ? stage.items.includes(selectedItem) : true;
+                const matchesTag = selectedTitle ? stage.tag === selectedTitle : true; // Fixed here
+                console.log(stage);
+                const matchesComplete = selectedComplete === 'all'
+                    ? true
+                    : selectedComplete === 'complete'
+                        ? stage.completed
+                        : !stage.completed;
+
+                const tag = tagsData[stage.tag];
+                const matchesActive = selectedActive === 'all'
+                    ? true
+                    : selectedActive === 'active'
+                        ? tag && tag.active 
+                        : tag && !tag.active;
+
+                        
+                return matchesItem && matchesTag && matchesComplete && matchesActive;
+            });
+
+            renderStages(filteredStages);
+        }
+
+
+        function updateProgress(stage, row, comp) {
+            stage.completed = comp; // Update the stage's completed status
+            if (comp) {
+                row.classList.add('completed'); // Add the completed class
+            } else {
+                row.classList.remove('completed'); // Remove the completed class
+            }
+            console.log(`Updated ${stage.name}, ${stage.tag} to completed: ${comp}`);
+            localStorage.setItem(stage.name, comp); // Save progress in local storage
+        }
+
+    </script>
+</body>
+</html>
