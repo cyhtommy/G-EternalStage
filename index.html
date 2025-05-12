@@ -314,14 +314,16 @@
 
                 // Transform the data into the expected format
                 const stages = rawData.map(entry => ({
+                    id:entry.ID,
                     name: entry.Title,
                     tag: entry.Scenario,
                     items: Object.keys(entry.Item),
                     units: Object.keys(entry.Unit),
                     techs: entry.Tech,
-                    completed: false
+                    completed: localStorage.getItem(entry.ID) === 'true'
+                    
                 }));
-
+                
                 // Update global variables
                 stagesData = stages;
                 console.log('Stages Data:', stagesData);
@@ -367,7 +369,7 @@
 
             for (const stage of stagesData) {
                 stage.completed = false; // Reset all stages to not completed
-                localStorage.setItem(stage.name, false); // Save progress in local storage
+                localStorage.setItem(stage.id, false); // Save progress in local storage
             }
 
             applyFilters(); // Reapply filters to refresh the displayed stages
@@ -487,7 +489,6 @@
             const filteredStages = stagesData.filter(stage => {
                 const matchesItem = selectedItem ? stage.items.includes(selectedItem) : true;
                 const matchesTag = selectedTitle ? stage.tag === selectedTitle : true; // Fixed here
-                console.log(stage);
                 const matchesComplete = selectedComplete === 'all'
                     ? true
                     : selectedComplete === 'complete'
@@ -516,8 +517,8 @@
             } else {
                 row.classList.remove('completed'); // Remove the completed class
             }
-            console.log(`Updated ${stage.name}, ${stage.tag} to completed: ${comp}`);
-            localStorage.setItem(stage.name, comp); // Save progress in local storage
+            console.log(`Updated ${stage.id} to completed: ${comp}`);
+            localStorage.setItem(stage.id, comp); // Save progress in local storage
         }
 
     </script>
