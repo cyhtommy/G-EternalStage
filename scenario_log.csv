@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ID,Title,File Path,Active
 gundam,機動戰士高達,image\scenario\gundam.png,True
 gundamz,機動戰士Z高達 A New Translation,image\scenario\gundamz.png,True
@@ -12,3 +13,19 @@ orphan,機動戰士高達 鐵血孤兒,image\scenario\orphan.png,True
 mercury,機動戰士高達 水星的魔女,image\scenario\mercury.png,True
 fierce,強敵襲來,image\scenario\fierce.png,True
 astray_ev1,活動：機動戰士高達SEED ASTRAY,image\scenario\astray_ev1.png,False
+=======
+ID,Title,File Path,Active
+gundam,機動戰士高達,image\scenario\gundam.png,True
+gundamz,機動戰士Z高達 A New Translation,image\scenario\gundamz.png,True
+gundamzz,機動戰士高達ZZ,image\scenario\gundamzz.png,True
+wgundam,新機動戰記高達W,image\scenario\wgundam.png,True
+gundamx,機動新世紀高達X,image\scenario\gundamx.png,True
+seed,機動戰士高達SEED,image\scenario\seed.png,True
+seedre,機動戰士高達SEED Recollection,image\scenario\seedre.png,True
+ggundam,機動武鬥傳G高達,image\scenario\ggundam.png,True
+gundam00,機動戰士高達00,image\scenario\gundam00.png,True
+orphan,機動戰士高達 鐵血孤兒,image\scenario\orphan.png,True
+mercury,機動戰士高達 水星的魔女,image\scenario\mercury.png,True
+fierce,強敵襲來,image\scenario\fierce.png,True
+astray_ev1,活動：機動戰士高達SEED ASTRAY,image\scenario\astray_ev1.png,False
+>>>>>>> c179494010e219a542fad61ecf25fd9f39d8791e

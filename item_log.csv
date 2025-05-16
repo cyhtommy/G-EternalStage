@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ID,Title,File Path
 la_sh_ssr,鐳射射擊SSR,image\item\IMG_0219.PNG
 sp_sh_ssr,特殊射擊SSR,image\item\IMG_0221.PNG
@@ -9,3 +10,16 @@ aw_ssr,覺醒SSR,image\item\IMG_0223.PNG
 sp_bo_ssr,[強敵來襲] 特殊SSR,image\item\IMG_0226.PNG
 la_bo_ssr,[強敵來襲] 鐳射SSR,image\item\IMG_0224.PNG
 ph_bo_ssr,[強敵來襲] 物理SSR,image\item\IMG_0225.PNG
+=======
+ID,Title,File Path
+la_sh_ssr,鐳射射擊SSR,image\item\IMG_0219.PNG
+sp_sh_ssr,特殊射擊SSR,image\item\IMG_0221.PNG
+ph_sh_ssr,物理射擊SSR,image\item\IMG_0227.PNG
+ph_f_ssr,物理格鬥SSR,image\item\IMG_0228.PNG
+sp_f_ssr,特殊格鬥SSR,image\item\IMG_0222.PNG
+la_f_ssr,鐳射格鬥SSR,image\item\IMG_0229.PNG
+aw_ssr,覺醒SSR,image\item\IMG_0223.PNG
+sp_bo_ssr,[強敵來襲] 特殊SSR,image\item\IMG_0226.PNG
+la_bo_ssr,[強敵來襲] 鐳射SSR,image\item\IMG_0224.PNG
+ph_bo_ssr,[強敵來襲] 物理SSR,image\item\IMG_0225.PNG
+>>>>>>> c179494010e219a542fad61ecf25fd9f39d8791e
