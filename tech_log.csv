@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿ID,Title,File Path
 00_H_1_1,GN裝甲 Type-E,image\tech\00_H_1_1.png
 00_H_1_2,GN裝甲 Type-D,image\tech\00_H_1_2.png
@@ -42,48 +41,3 @@ zz_H_2_1,卡碧尼(ZZ版),image\tech\zz_H_2_1.png
 zz_H_2_2,京麥古,image\tech\zz_H_2_2.png
 zz_H_2_3,渣古III改,image\tech\zz_H_2_3.png
 zz_H_3_1,京密煞,image\tech\zz_H_3_1.png
-=======
-﻿ID,Title,File Path
-00_H_1_1,GN裝甲 Type-E,image\tech\00_H_1_1.png
-00_H_1_2,GN裝甲 Type-D,image\tech\00_H_1_2.png
-00_H_1_3,艾法佗,image\tech\00_H_1_3.png
-astray_1,迷惘高達藍色機 二型L,image\tech\astray_1.png
-astray_2,迷惘高達金色機 天,image\tech\astray_2.png
-g_H_1_1,鏡高達,image\tech\g_H_1_1.png
-g_H_1_2,宗師高達,image\tech\g_H_1_2.png
-g_H_1_3,魔鬼高達(第1形態),image\tech\g_H_1_3.png
-gundam_H_1_1,魔霸,image\tech\gundam_H_1_1.png
-gundam_H_1_2,泛用試作型強人,image\tech\gundam_H_1_2.png
-gundam_H_2_1,G-3高達,image\tech\gundam_H_2_1.png
-gundam_H_3_1,自護號,image\tech\gundam_H_3_1.png
-mer_H_1_1,烏爾魔靈高達,image\tech\mer_H_1_1.png
-mer_H_1_2,索恩魔靈高達,image\tech\mer_H_1_2.png
-mer_H_1_3,風靈高達(改修型),image\tech\mer_H_1_3.png
-orp_H_1_1,高達巴巴托司 第6型態,image\tech\orp_H_1_1.png
-orp_H_1_2,高達古辛重鍛型,image\tech\orp_H_1_2.png
-orp_H_1_3,古尼捷．愛因,image\tech\orp_H_1_3.png
-seed_H_1_1,完美型突擊高達,image\tech\seed_H_1_1.png
-seed_H_2_1,正義高達(流星裝備),image\tech\seed_H_2_1.png
-seed_H_2_2,自由高達(流星裝備),image\tech\seed_H_2_2.png
-seed_H_3_1,天意高達,image\tech\seed_H_3_1.png
-seedre_H_1_1,龍騎兵突擊高達,image\tech\seedre_H_1_1.png
-seedre_H_1_2,姆拉沙美 飛行能力試驗型1,image\tech\seedre_H_1_2.png
-w_H_1_1,多魯基斯II,image\tech\w_H_1_1.png
-w_H_2_1,高達艾比安,image\tech\w_H_2_1.png
-w_H_3_1,雙頭龍高達,image\tech\w_H_3_1.png
-w_H_3_2,地獄死神高達,image\tech\w_H_3_2.png
-w_H_3_3,飛翼高達零式,image\tech\w_H_3_3.png
-x_H_1_1,帕度利亞,image\tech\x_H_1_1.png
-x_H_1_2,貝廸哥,image\tech\x_H_1_2.png
-x_H_1_3,高達X分裂者,image\tech\x_H_1_3.png
-z_H_1_1,百式,image\tech\z_H_1_1.png
-z_H_1_2,Z高達,image\tech\z_H_1_2.png
-z_H_2_1,重高達,image\tech\z_H_2_1.png
-z_H_3_1,卡碧尼,image\tech\z_H_3_1.png
-z_H_3_2,The．O,image\tech\z_H_3_2.png
-zz_H_1_1,全裝甲型ZZ高達,image\tech\zz_H_1_1.png
-zz_H_2_1,卡碧尼(ZZ版),image\tech\zz_H_2_1.png
-zz_H_2_2,京麥古,image\tech\zz_H_2_2.png
-zz_H_2_3,渣古III改,image\tech\zz_H_2_3.png
-zz_H_3_1,京密煞,image\tech\zz_H_3_1.png
->>>>>>> c179494010e219a542fad61ecf25fd9f39d8791e
