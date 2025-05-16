@@ -1,0 +1,27 @@
+{"ID": "gundam_H_1", "Title": "HARD 1", "Scenario": "gundam", "Item": {"ph_f_ssr": false}, "Unit": {"gundam_H_1_1": false, "gundam_H_1_2": false, "gundam_H_1_3": false}, "Tech": ["gundam_H_1_1", "gundam_H_1_2"]}
+{"ID": "gundam_H_2", "Title": "HARD 2", "Scenario": "gundam", "Item": {"ph_sh_ssr": false}, "Unit": {"gundam_H_2_1": false,"gundam_H_2_2": false}, "Tech": ["gundam_H_2_1"]}
+{"ID": "gundam_H_3", "Title": "HARD 3", "Scenario": "gundam", "Item": {"la_sh_ssr": false}, "Unit": {"gundam_H_3_1": false, "gundam_H_3_2": false}, "Tech": ["gundam_H_3_1"]}
+{"ID": "z_H_1", "Title": "HARD 1", "Scenario": "gundamz", "Item": {"ph_sh_ssr": false}, "Unit": {"z_H_1_1": false,"z_H_1_2": true}, "Tech": ["z_H_1_1", "z_H_1_2"]}
+{"ID": "z_H_2", "Title": "HARD 2", "Scenario": "gundamz", "Item": {"la_sh_ssr": false}, "Unit": {"z_H_2_1": false,"z_H_2_2": true}, "Tech": ["z_H_2_1"]}
+{"ID": "z_H_3", "Title": "HARD 3", "Scenario": "gundamz", "Item": {"aw_ssr": false}, "Unit": {"z_H_3_1": false, "z_H_3_2": false}, "Tech": ["z_H_3_1", "z_H_3_2"]}
+{"ID": "zz_H_1", "Title": "HARD 1", "Scenario": "gundamzz", "Item": {"la_f_ssr": false}, "Unit": {"zz_H_1_1": false, "zz_H_1_2": false}, "Tech": ["zz_H_1_1"]}
+{"ID": "zz_H_2", "Title": "HARD 2", "Scenario": "gundamzz", "Item": {"aw_ssr": false}, "Unit": {"zz_H_2_1": false, "zz_H_2_2": false, "zz_H_2_3": false}, "Tech": ["zz_H_2_1", "zz_H_2_2", "zz_H_2_3"]}
+{"ID": "zz_H_3", "Title": "HARD 3", "Scenario": "gundamzz", "Item": {"la_sh_ssr": false}, "Unit": {"zz_H_3_1": false, "zz_H_3_2": false, "zz_H_3_3": true}, "Tech": ["zz_H_3_1"]}
+{"ID": "g_H_1", "Title": "HARD 1", "Scenario": "ggundam", "Item": {"sp_f_ssr": true}, "Unit": {"g_H_1_1": false, "g_H_1_2": false, "g_H_1_3": false, "g_H_1_4": false}, "Tech": ["g_H_1_1", "g_H_1_2", "g_H_1_3"]}
+{"ID": "w_H_1", "Title": "HARD 1", "Scenario": "wgundam", "Item": {"ph_sh_ssr": false}, "Unit": {"w_H_1_1": false, "w_H_1_2": false, "w_H_1_3": false}, "Tech": ["w_H_1_1"]}
+{"ID": "w_H_2", "Title": "HARD 2", "Scenario": "wgundam", "Item": {"ph_f_ssr": false}, "Unit": {"w_H_2_1": false, "w_H_2_2": false}, "Tech": ["w_H_2_1"]}
+{"ID": "w_H_3", "Title": "HARD 3", "Scenario": "wgundam", "Item": {"la_f_ssr": false}, "Unit": {"w_H_3_1": false, "w_H_3_2": false, "w_H_3_3": true}, "Tech": ["w_H_3_1", "w_H_3_2", "w_H_3_3"]}
+{"ID": "x_H_1", "Title": "HARD 1", "Scenario": "gundamx", "Item": {"sp_sh_ssr": true}, "Unit": {"x_H_1_1": false, "x_H_1_2": false, "x_H_1_3": true, "x_H_1_4": true}, "Tech": ["x_H_1_1", "x_H_1_2", "x_H_1_3"]}
+{"ID": "seed_H_1", "Title": "HARD 1", "Scenario": "seed", "Item": {"sp_f_ssr": false}, "Unit": {"seed_H_1_1": false, "seed_H_1_2": false, "seed_H_1_3": true}, "Tech": ["seed_H_1_1"]}
+{"ID": "seed_H_2", "Title": "HARD 2", "Scenario": "seed", "Item": {"sp_sh_ssr": false}, "Unit": {"seed_H_1_3": false, "seed_H_2_1": false}, "Tech": ["seed_H_2_1", "seed_H_2_2"]}
+{"ID": "seed_H_3", "Title": "HARD 3", "Scenario": "seed", "Item": {"la_sh_ssr": false}, "Unit": {"seed_H_3_1": false, "seed_H_3_2": true}, "Tech": ["seed_H_3_1"]}
+{"ID": "seedre_H_1", "Title": "HARD 1", "Scenario": "seedre", "Item": {"la_f_ssr": false}, "Unit": {"seedre_H_1_1": false, "seedre_H_1_2": true}, "Tech": ["seedre_H_1_1", "seedre_H_1_2"]}
+{"ID": "00_H_1", "Title": "HARD 1", "Scenario": "gundam00", "Item": {"ph_sh_ssr": true}, "Unit": {"00_H_1_1": false, "00_H_1_2": false, "00_H_1_3": false}, "Tech": ["00_H_1_1", "00_H_1_2", "00_H_1_3"]}
+{"ID": "orp_H_1", "Title": "HARD 1", "Scenario": "orphan", "Item": {"ph_f_ssr": true}, "Unit": {"orp_H_1_1": false, "orp_H_1_2": false}, "Tech": ["orp_H_1_1", "orp_H_1_2", "orp_H_1_3"]}
+{"ID": "mer_H_1", "Title": "HARD 1", "Scenario": "mercury", "Item": {"la_sh_ssr": true}, "Unit": {"mer_H_1_1": false, "mer_H_1_2": false, "mer_H_1_3": false}, "Tech": ["mer_H_1_1", "mer_H_1_2", "mer_H_1_3"]}
+{"ID": "astray_H_1", "Title": "HARD 1", "Scenario": "astray_ev1", "Item": {}, "Unit": {"astray_ev_1_1": false, "astray_ev_1_2": false}, "Tech": []}
+{"ID": "astray_H_2", "Title": "HARD 2", "Scenario": "astray_ev1", "Item": {}, "Unit": {"astray_ev_2_1": false,"astray_ev_2_2": false}, "Tech": []}
+{"ID": "astray_H_3", "Title": "HARD 3", "Scenario": "astray_ev1", "Item": {}, "Unit": {"astray_ev_2_1": false, "astray_ev_1_1": false}, "Tech": []}
+{"ID": "f-redgundam", "Title": "紅色高達(0085)", "Scenario": "fierce", "Item": {"sp_bo_ssr": false, "la_bo_ssr": false, "ph_bo_ssr": false}, "Unit": {"f_rg": false}, "Tech": []}
+{"ID": "f-obe", "Title": "奧伯隆(裝甲型態)", "Scenario": "fierce", "Item": {"sp_bo_ssr": false, "la_bo_ssr": false, "ph_bo_ssr": false}, "Unit": {"f_obe": false}, "Tech": []}
+{"ID": "f-dice", "Title": "骰子高達", "Scenario": "fierce", "Item": {"ph_bo_ssr": false, "la_bo_ssr": false, "sp_bo_ssr": false}, "Unit": {"f_dice": false}, "Tech": []}
