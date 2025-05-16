@@ -28,7 +28,7 @@ def load_csv(filepath, index_col='ID'):
     """
     load the csv
     """
-    df = pd.read_csv(filepath)
+    df = pd.read_csv(filepath, encoding='utf-8')
     df = df.set_index(index_col)
     return df
 
@@ -89,7 +89,7 @@ def show_saved_list(filepath,tree):
 def log_stage_detail(log_data,tree):
     
     # Append to JSON
-    with open("stage_log.json", "a") as f:
+    with open("stage_log.json", "a", encoding = "utf-8") as f:
         f.write(json.dumps(log_data, ensure_ascii=False) + "\n")
     show_saved_list(filepath,tree)
     log_data['ID'] = ""

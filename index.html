@@ -92,11 +92,20 @@
         .red-frame {
             position: relative;
             display: inline-block;
-            border: 2px solid red; /* 紅色邊框 */
+            border: 1px solid black; /* 紅色邊框 */
         }
 
             .red-frame img {
                 display: block; /* 確保圖片本身是塊級元素，適應父容器 */
+            }
+
+
+            .tech-img-frame.want {
+                border-color: green;
+            }
+
+            .tech-img-frame.dontwant img {
+                filter: grayscale(1);
             }
 
             .red-frame::before {
@@ -118,6 +127,29 @@
             gap: 5px; /* 圖片之間的間距 */
         }
 
+        .tech-img-frame {
+            border: 3px solid transparent;
+            border-radius: 8px;
+            padding: 2px;
+            transition: border 0.2s, filter 0.2s;
+            display: inline-block;
+        }
+
+            .tech-img-frame.want {
+                border-color: red;
+            }
+
+            .tech-img-frame.dontwant img {
+                filter: grayscale(1);
+            }
+
+            .tech-img-frame img {
+                width: 75px;
+                height: 75px;
+                object-fit: contain;
+                display: block;
+            }
+
 
     </style>
 </head>
@@ -125,7 +157,7 @@
     <h1>Hard關掉落</h1>
     <div id="filter">
         <!--<select id="techFilter">
-    <option value="">開發技術書選擇</option>-->
+        <option value="">開發技術書選擇</option>-->
         <!-- Drop items will be populated here -->
         <!--</select>-->
         <select id="itemFilter" onchange="applyFilters()">
@@ -140,13 +172,30 @@
             <option value="all">全部關卡</option>
             <option value="imcomplete">僅未完成關卡</option>
         </select>
+        <select id="wantFilter" onchange="applyFilters()">
+            <option value="all">全部關卡</option>
+            <option value="dontwant">略過無需求關卡</option>
+        </select>
         <select id="activeFilter" onchange="applyFilters()">
             <option value="all">全部關卡</option>
             <option value="active">僅當前開放關卡</option>
             <option value="inactive">過往關卡</option>
         </select>
         <button id="resetButton">重置已完成關卡</button>
+        <button id="techPrefButton">開發書偏好設定</button>
     </div>
+
+    
+
+    <div id="techPrefModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="background:#fff; margin:40px auto; padding:20px; max-width:800px; border-radius:8px; position:relative;">
+            <button id="closeTechPref" style="position:absolute; top:10px; right:10px;">關閉</button>
+            <button id="resetTechPref" style="position:absolute; top:10px; right:60px;">重設</button>
+            <h2>技術偏好設定</h2>
+            <div id="techPrefList" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+        </div>
+    </div>
+
 
 
     <div id="stageList">
@@ -173,7 +222,7 @@
         // Fetch data from the database and populate the filters and stage list
         async function fetchItemsData() {
             try {
-                const response = await fetch('item_log.csv');
+                const response = await fetch('item_log.csv?' + Date.now());
                 if (!response.ok) {
                     throw new Error(`Failed to fetch items data: ${response.statusText}`);
                 }
@@ -209,7 +258,7 @@
 
         async function fetchUnitData() {
             try {
-                const response = await fetch('unit_log.csv');
+                const response = await fetch('unit_log.csv?' + Date.now());
                 if (!response.ok) {
                     throw new Error(`Failed to fetch items data: ${response.statusText}`);
                 }
@@ -245,7 +294,7 @@
 
         async function fetchTechsData() {
             try {
-                const response = await fetch('tech_log.csv');
+                const response = await fetch('tech_log.csv?' + Date.now());
                 if (!response.ok) {
                     throw new Error(`Failed to fetch items data: ${response.statusText}`);
                 }
@@ -282,8 +331,8 @@
 
         async function fetchTagsData() {
             try {
-                const response = await fetch('scenario_log.csv'); // Replace with the actual file name
-                if (!response.ok) {
+                const response = await fetch('scenario_log.csv?' + Date.now());
+                  if (!response.ok) {
                     throw new Error(`Failed to fetch tags data: ${response.statusText}`);
                 }
 
@@ -328,7 +377,7 @@
                 const response = await fetch('stage_log.json');
                 if (!response.ok) {
                     throw new Error(`Failed to fetch data: ${response.statusText}`);
-                    
+
                 }
 
                 // Read the NDJSON file as text
@@ -344,16 +393,16 @@
 
                 // Transform the data into the expected format
                 const stages = rawData.map(entry => ({
-                    id:entry.ID,
+                    id: entry.ID,
                     name: entry.Title,
                     tag: entry.Scenario,
                     items: entry.Item,
                     units: entry.Unit,
                     techs: entry.Tech,
                     completed: localStorage.getItem(entry.ID) === 'true'
-                    
+
                 }));
-                
+
                 // Update global variables
                 stagesData = stages;
                 console.log('Stages Data:', stagesData);
@@ -364,7 +413,7 @@
 
                 // Populate filters and render stages
                 populateFilters();
-                
+
                 renderStages(stagesData);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -392,7 +441,7 @@
 
 
         document.getElementById('resetButton').onclick = () => {
-            
+
             const completebar = document.querySelector('#completeFilter'); // Get the complete filter
 
             completebar.value = 'all'; // Reset the complete filter to "all"
@@ -432,11 +481,11 @@
 
 
 
-        
 
 
 
-        
+
+
 
         function populateFilters() {
             const itemFilter = document.getElementById('itemFilter');
@@ -469,7 +518,7 @@
             // Here you would typically send the update to your backend
         }
 
- 
+
 
 
 
@@ -491,12 +540,12 @@
                 const tagImage = `<img src="${tagsData[stage.tag].image}" alt="${stage.tag}" title="${tagsData[stage.tag].title}" data-tag="${stage.tag}">`;
                 const itemsImages = Object.entries(stage.items)
                     .map(([key, value]) => {
-                        const frameClass = value ? 'red-frame' : ''; 
+                        const frameClass = value ? 'red-frame' : '';
                         return `
-                            <div class="${frameClass}">
-                                <img src="${itemsData[key].image}" alt="${key}" title="${itemsData[key].title}">
-                            </div>
-                        `;
+                                <div class="${frameClass}">
+                                    <img src="${itemsData[key].image}" alt="${key}" title="${itemsData[key].title}">
+                                </div>
+                            `;
                     })
                     .join(' ');
 
@@ -504,23 +553,37 @@
                     .map(([key, value]) => {
                         const frameClass = value ? 'red-frame' : '';
                         return `
-                            <div class="${frameClass}">
-                                <img src="${unitsData[key].image}" alt="${key}" title="${unitsData[key].title}">
-                            </div>
-                        `;
+                                <div class="${frameClass}">
+                                    <img src="${unitsData[key].image}" alt="${key}" title="${unitsData[key].title}">
+                                </div>
+                            `;
                     })
                     .join(' ');
 
-                const techImages = stage.techs.map(tech => `<img src="${techsData[tech].image}" alt="${tech}" title="${techsData[tech].title}">`).join(' ');
-                
+                //const techImages = stage.techs.map(tech => `<img src="${techsData[tech].image}" alt="${tech}" title="${techsData[tech].title}">`).join(' ');
+
+                const techPrefs = getTechPrefs();
+                const techImages = stage.techs.map(tech => {
+                    const pref = techPrefs[tech] || 0;
+                    let frameClass = 'tech-img-frame';
+                    if (pref === 1) frameClass += ' want';
+                    if (pref === 2) frameClass += ' dontwant';
+                    return `
+                            <div class="${frameClass}">
+                                <img src="${techsData[tech].image}" alt="${tech}" title="${techsData[tech].title}">
+                            </div>
+                        `;
+                                    }).join(' ');
+
+
                 row.innerHTML = `
-                    
-                    <td>${tagImage}</td>
-                    <td>${stage.name}</td>
-                    <td><div class="unit-container">${itemsImages}</div></td>
-                    <td><div class="unit-container">${unitImages}</div></td>
-                    <td>${techImages}</td>
-                `;
+
+                        <td>${tagImage}</td>
+                        <td>${stage.name}</td>
+                        <td><div class="unit-container">${itemsImages}</div></td>
+                        <td><div class="unit-container">${unitImages}</div></td>
+                        <td>${techImages}</td>
+                    `;
                 row.prepend(checkboxCell); // Add the checkbox cell to the beginning of the row
 
                 tbody.appendChild(row);
@@ -533,6 +596,9 @@
             const selectedTitle = document.getElementById('titleFilter').value;
             const selectedComplete = document.getElementById('completeFilter').value;
             const selectedActive = document.getElementById('activeFilter').value;
+            const selectedWant = document.getElementById('wantFilter').value;
+
+            const techPrefs = getTechPrefs();
 
             const filteredStages = stagesData.filter(stage => {
                 const matchesItem = selectedItem ? Object.keys(stage.items).includes(selectedItem) : true;
@@ -547,11 +613,21 @@
                 const matchesActive = selectedActive === 'all'
                     ? true
                     : selectedActive === 'active'
-                        ? tag && tag.active 
+                        ? tag && tag.active
                         : tag && !tag.active;
 
-                        
-                return matchesItem && matchesTag && matchesComplete && matchesActive;
+                let matchesWant = true;
+                if (selectedWant === 'dontwant') {
+                    
+                    if (
+                        stage.techs.length > 0 &&
+                        stage.techs.every(techId => (techPrefs[techId] || 0) === 2)
+                    ) {
+                        matchesWant = false;
+                    }
+                }
+
+                return matchesItem && matchesTag && matchesComplete && matchesActive && matchesWant;
             });
 
             renderStages(filteredStages);
@@ -568,6 +644,73 @@
             console.log(`Updated ${stage.id} to completed: ${comp}`);
             localStorage.setItem(stage.id, comp); // Save progress in local storage
         }
+
+
+        // 技術偏好狀態儲存於 localStorage
+        function getTechPrefs() {
+            return JSON.parse(localStorage.getItem('techPrefs') || '{}');
+        }
+        function setTechPrefs(prefs) {
+            localStorage.setItem('techPrefs', JSON.stringify(prefs));
+        }
+
+        // 彈窗開關
+        document.getElementById('techPrefButton').onclick = function () {
+            renderTechPrefList();
+            document.getElementById('techPrefModal').style.display = 'block';
+        };
+        document.getElementById('closeTechPref').onclick = function () {
+            document.getElementById('techPrefModal').style.display = 'none';
+            applyFilters();
+        };
+        document.getElementById('resetTechPref').onclick = function () {
+            // 取得所有技術ID，全部設為0
+            const prefs = {};
+            Object.keys(techsData).forEach(id => {
+                prefs[id] = 0;
+            });
+            setTechPrefs(prefs);
+            renderTechPrefList(); // 立即刷新彈窗內容
+            applyFilters();       // 立即刷新主表格
+        };
+
+        // 渲染技術圖片清單
+        function renderTechPrefList() {
+            const techPrefList = document.getElementById('techPrefList');
+            techPrefList.innerHTML = '';
+            const prefs = getTechPrefs();
+
+            Object.entries(techsData).forEach(([id, tech]) => {
+                const frame = document.createElement('div');
+                frame.className = 'tech-img-frame';
+                frame.title = tech.title;
+
+                // 狀態：0=預設, 1=想要, 2=不要
+                let state = prefs[id] || 0;
+                if (state === 1) frame.classList.add('want');
+                if (state === 2) frame.classList.add('dontwant');
+
+                const img = document.createElement('img');
+                img.src = tech.image;
+                img.alt = tech.title;
+
+                frame.appendChild(img);
+
+                // 點擊切換狀態
+                frame.onclick = function () {
+                    state = (state + 1) % 3;
+                    prefs[id] = state;
+                    setTechPrefs(prefs);
+
+                    frame.classList.remove('want', 'dontwant');
+                    if (state === 1) frame.classList.add('want');
+                    if (state === 2) frame.classList.add('dontwant');
+                };
+
+                techPrefList.appendChild(frame);
+            });
+        }
+
 
     </script>
 </body>
