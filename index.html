@@ -536,8 +536,10 @@
                 checkbox.checked = stage.completed;
                 checkbox.onchange = () => updateProgress(stage, row, checkbox.checked);
                 checkboxCell.appendChild(checkbox);
-
+                ///console.log(stage.tag)
+                ///console.log(tagsData[stage.tag]);
                 const tagImage = `<img src="${tagsData[stage.tag].image}" alt="${stage.tag}" title="${tagsData[stage.tag].title}" data-tag="${stage.tag}">`;
+                
                 const itemsImages = Object.entries(stage.items)
                     .map(([key, value]) => {
                         const frameClass = value ? 'red-frame' : '';
