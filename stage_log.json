@@ -25,6 +25,6 @@
 {"ID": "f-redgundam", "Title": "紅色高達(0085)", "Scenario": "fierce", "Item": {"sp_bo_ssr": false, "la_bo_ssr": false, "ph_bo_ssr": false}, "Unit": {"f_rg": false}, "Tech": []}
 {"ID": "f-obe", "Title": "奧伯隆(裝甲型態)", "Scenario": "fierce", "Item": {"sp_bo_ssr": false, "la_bo_ssr": false, "ph_bo_ssr": false}, "Unit": {"f_obe": false}, "Tech": []}
 {"ID": "f-dice", "Title": "骰子高達", "Scenario": "fierce", "Item": {"ph_bo_ssr": false, "la_bo_ssr": false, "sp_bo_ssr": false}, "Unit": {"f_dice": false}, "Tech": []}
-{"ID": "star1_H_1", "Title": "HARD 1", "Scenario": "stardust1", "Item": {}, "Unit": {"star1_H_1_1": false, "star1_H_1_2": false, "star1_H_1_3": false}, "Tech": []}
-{"ID": "star1_H_2", "Title": "HARD 2", "Scenario": "stardust1", "Item": {}, "Unit": {"star1_H_2_1": false, "star1_H_2_2": false, "star1_H_2_3": false, "star1_H_1_3": false}, "Tech": []}
-{"ID": "star1_H_3", "Title": "HARD 3", "Scenario": "stardust1", "Item": {}, "Unit": {"star1_H_3_1": false, "star1_H_3_2": false, "star1_H_3_3": false, "star1_H_3_4": false, "star1_H_1_3": false}, "Tech": []}
+{"ID": "star1_H_1", "Title": "HARD 1", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_1_1": false, "star1_H_1_2": false, "star1_H_1_3": false}, "Tech": []}
+{"ID": "star1_H_2", "Title": "HARD 2", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_2_1": false, "star1_H_2_2": false, "star1_H_2_3": false, "star1_H_1_3": false}, "Tech": []}
+{"ID": "star1_H_3", "Title": "HARD 3", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_3_1": false, "star1_H_3_2": false, "star1_H_3_3": false, "star1_H_3_4": false, "star1_H_1_3": false}, "Tech": []}
