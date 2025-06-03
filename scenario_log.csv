@@ -10,5 +10,6 @@ ggundam,機動武鬥傳G高達,image\scenario\ggundam.png,True
 gundam00,機動戰士高達00,image\scenario\gundam00.png,True
 orphan,機動戰士高達 鐵血孤兒,image\scenario\orphan.png,True
 mercury,機動戰士高達 水星的魔女,image\scenario\mercury.png,True
-fierce,強敵襲來,image\scenario\fierce.png,True
+fierce,強敵襲來,image\scenario\fierce.png,False
 astray_ev1,活動：機動戰士高達SEED ASTRAY,image\scenario\astray_ev1.png,False
+stardust1,機動戰士高達0083 STARDUST MEMORY 第1波,image\scenario\stardust1.png,True
