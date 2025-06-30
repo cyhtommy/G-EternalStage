@@ -23,8 +23,8 @@ if __name__ == "__main__":
     crop_coords = (333, 457, 518, 642)  # Change this to your needs
 
     # Define input and output folders
-    input_folder = 'image/'
-    output_folder = 'image/output'
+    input_folder = 'image/item/raw'
+    output_folder = 'image/item'
 
     batch_crop_images(input_folder, output_folder, crop_coords)
 
