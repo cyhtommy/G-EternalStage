@@ -28,3 +28,7 @@
 {"ID": "star1_H_1", "Title": "HARD 1", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_1_1": false, "star1_H_1_2": false, "star1_H_1_3": false}, "Tech": []}
 {"ID": "star1_H_2", "Title": "HARD 2", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_2_1": false, "star1_H_2_2": false, "star1_H_2_3": false, "star1_H_1_3": false}, "Tech": []}
 {"ID": "star1_H_3", "Title": "HARD 3", "Scenario": "star_ev1", "Item": {}, "Unit": {"star1_H_3_1": false, "star1_H_3_2": false, "star1_H_3_3": false, "star1_H_3_4": false, "star1_H_1_3": false}, "Tech": []}
+{"ID": "char_H_1", "Title": "HARD 1", "Scenario": "charcounter", "Item": {"aw_ssr": false}, "Unit": {"charcounter_H_1_1": false, "charcounter_H_1_2": false}, "Tech": ["charcounter_H_1_1"]}
+{"ID": "char_H_2", "Title": "HARD 2", "Scenario": "charcounter", "Item": {"sp_f_ssr": false}, "Unit": {"charcounter_H_2_1": false, "charcounter_H_2_2": true}, "Tech": ["charcounter_H_2_1", "charcounter_H_2_2"]}
+{"ID": "char_H_3", "Title": "HARD 3", "Scenario": "charcounter", "Item": {"sp_sh_ssr": false}, "Unit": {"charcounter_H_3_1": false, "charcounter_H_3_2": false}, "Tech": ["charcounter_H_3_1", "charcounter_H_3_2"]}
+{"ID": "seedd_H_1", "Title": "HARD 1", "Scenario": "seed-d", "Item": {"ph_sh_ssr": true}, "Unit": {"seedd_H_1_1": false}, "Tech": ["seedd_H_1_1", "seedd_H_1_2", "seedd_H_1_3"]}
